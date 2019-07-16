@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\index.js"],{
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5CNEXT%5Cpages%5Cindex.js!./":
-/*!*********************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5CNEXT%5Cpages%5Cindex.js ***!
-  \*********************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5Cnext-proj%5Cpages%5Cindex.js!./":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5Cnext-proj%5Cpages%5Cindex.js ***!
+  \**************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45,7 +45,7 @@ module.exports = (__webpack_require__(/*! dll-reference dll_7aff549c98b978433226
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "D:\\DONEV\\try\\NEXT\\pages\\index.js";
+var _jsxFileName = "D:\\DONEV\\try\\next-proj\\pages\\index.js";
 
 
 var Index = function Index() {
@@ -55,7 +55,7 @@ var Index = function Index() {
       lineNumber: 4
     },
     __self: this
-  }, "This is the index page");
+  }, "This is the index page ZZZZ!!!");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Index);
@@ -63,13 +63,13 @@ var Index = function Index() {
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5CNEXT%5Cpages%5Cindex.js ***!
-  \*************************************************************************************************************/
+/*!******************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5Cnext-proj%5Cpages%5Cindex.js ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5CNEXT%5Cpages%5Cindex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5CNEXT%5Cpages%5Cindex.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5Cnext-proj%5Cpages%5Cindex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=D%3A%5CDONEV%5Ctry%5Cnext-proj%5Cpages%5Cindex.js!./");
 
 
 /***/ }),

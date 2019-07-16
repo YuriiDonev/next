@@ -1,7 +1,7 @@
 
 const Index = () => {
   return (
-    <div>This is the index page</div>
+    <div>This is the index page ZZZZ!!!</div>
   );
 }
 
