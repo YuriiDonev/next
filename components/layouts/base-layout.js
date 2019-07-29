@@ -3,10 +3,14 @@ import Header from '../shared/header.js';
 
 const BaseLayout = (props) => {
   return (
-    <Fragment>
+    <div className="layout-container" >
       <Header />
-      {props.children}
-    </Fragment>
+      <main className={`cover ${props.className}`}>
+        <div className="wrapper">
+          { props.children }
+        </div>
+      </main>
+    </div>
   );
 }
 

@@ -12,7 +12,6 @@ class PortfolioItem extends Component {
     let portfolio = {};
 
     try {
-
       const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${portfolioId}`);
       console.log('res.data ', res.data);
       portfolio = res.data;

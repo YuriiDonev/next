@@ -1,6 +1,8 @@
+@import './shared/fonts';
+@import './index';
 
-span {
-  margin-right: 20px;
-  color: green;
-  cursor: pointer;
+html, body {
+  height:100%;
+  width:100%;
+  font-family: 'Montserrat', 'Helvetica';
 }
