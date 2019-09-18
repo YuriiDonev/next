@@ -3,6 +3,8 @@ import { withRouter } from 'next/router';
 import BaseLayout from '../components/layouts/base-layout.js';
 import axios from 'axios';
 
+import BasePage from '../components/BasePage.js';
+
 class PortfolioItem extends Component {
 
   static async getInitialProps({ query }) {
@@ -25,17 +27,19 @@ class PortfolioItem extends Component {
 
   render() {
 
-    console.log('this.props ', this.props);
+    console.log('PortfolioItem this.props ', this.props);
     console.log('this.props.router.query ', this.props.router.query);
 
     const { portfolio } = this.props;
 
     return (
       <BaseLayout>
-        <h2>Portfolio:</h2>
-        <div>ID: {portfolio.id}</div>
-        <h2>Title: {portfolio.title}</h2>
-        <div>{portfolio.body}</div>
+        <BasePage title={'Single Portfolio Page'}>
+          <h2>Portfolio:</h2>
+          <div>ID: {portfolio.id}</div>
+          <h2>Title: {portfolio.title}</h2>
+          <div>{portfolio.body}</div>
+        </BasePage>
       </BaseLayout>
     );
   }

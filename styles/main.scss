@@ -1,15 +1,21 @@
 @import './shared/fonts';
+@import './shared/colors';
 
 // PAGES
 @import './index';
 
 // COMPONENTS
 @import './header';
+@import './portfolios';
 
 html, body {
   height:100%;
   width:100%;
   font-family: 'Montserrat', 'Helvetica';
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .self-typed {
@@ -21,4 +27,20 @@ html, body {
 
 .absolute {
   position: absolute;
+}
+
+.base-page {
+  padding: 150px 0px 100px 0px;
+  // color: white;
+  background-color: #ecedee;
+  min-height: 100vh;
+
+  .page-header {
+    .page-header-title {
+      font-weight: 700;
+      color: black;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  }
 }

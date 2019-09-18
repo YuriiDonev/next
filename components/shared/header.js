@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Link from 'next/link';
 import { Link as NextLink } from '../../routes.js';
 import {
@@ -14,65 +14,94 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
-export default class Example extends React.Component {
+import { Auth0Context } from '../../services/auth0.js';
+
+const BsNavLink = props => (
+  <Link href={props.route}>
+    <a className='nav-link port-navbar-link'>{props.title}</a>
+  </Link>
+);
+
+const Login = props => {
+  return <span
+    className='nav-link port-navbar-link clickable'
+    onClick={props.login}
+         >
+    Login
+  </span>
+};
+
+const Logout = props => (
+  <span
+    className='nav-link port-navbar-link clickable'
+    onClick={props.logout}
+  >
+    Logout
+  </span>
+);
+
+
+class Header extends Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      auth0: null
     };
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+
+  static contextType = Auth0Context;
+
   render() {
+
+    // console.log('Header this.context ', this.context);
+
+    const { isAuthenticated, loginWithPopup, loginWithRedirect, logout } = this.context;
+    const { classNameHeader } = this.props;
+
     return (
       <div>
-        <Navbar className='port-navbar port-default absolute' color="transparent" dark expand="md">
+        <Navbar className={`port-navbar port-nav-base absolute ${classNameHeader}`} color="transparent" dark expand="md">
           <NavbarBrand className='port-navbar-brand' href="/">Yurii Donev</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem className='port-navbar-item'>
-                <Link href='/'>
-                  <a className='nav-link port-navbar-link'>Home</a>
-                </Link>
+                <BsNavLink route='/' title='Home' />
               </NavItem>
               <NavItem className='port-navbar-item'>
-                <Link href='/about'>
-                  <a className='nav-link port-navbar-link'>About</a>
-                </Link>
+                <BsNavLink route='/about' title='About' />
               </NavItem>
               <NavItem className='port-navbar-item'>
-                <Link href='/portfolios'>
-                  <a className='nav-link port-navbar-link'>Home</a>
-                </Link>
+                <BsNavLink route='/portfolios' title='Portfolio' />
               </NavItem>
               <NavItem className='port-navbar-item'>
-                <Link href='/cv'>
-                  <a className='nav-link port-navbar-link'>CV</a>
-                </Link>
+                <BsNavLink route='/cv' title='CV' />
               </NavItem>
-              {/* <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
+
+              {
+                !isAuthenticated &&
+                <NavItem className='port-navbar-item'>
+                  <Login login={ loginWithRedirect } />
+                </NavItem>
+              }
+
+              {
+                isAuthenticated &&
+                <NavItem className='port-navbar-item'>
+                  <Logout logout={ logout } />
+                </NavItem>
+              }
+
+
             </Nav>
           </Collapse>
         </Navbar>
@@ -81,33 +110,4 @@ export default class Example extends React.Component {
   }
 }
 
-
-
-// import { Fragment } from 'react';
-// import Link from 'next/link';
-// import { Link as NextLink } from '../../routes.js';
-//
-// const Index = () => {
-//   return (
-//     <Fragment>
-//       <Link href='/'>
-//         <span>Home</span>
-//       </Link>
-//       <Link href='/about'>
-//         <span>About</span>
-//       </Link>
-//       <Link href='/portfolios'>
-//         <span>Portfolios</span>
-//       </Link>
-//       <Link href='/cv'>
-//         <span>CV</span>
-//       </Link>
-//
-//       {/* <NextLink route='test' params={{id: '2'}}><a>Test 2</a></NextLink>
-//       <NextLink route='/test/5'><a>Test 5</a></NextLink> */}
-//
-//     </Fragment>
-//   );
-// }
-//
-// export default Index;
+export default Header;
