@@ -16,11 +16,17 @@ import {
 
 import { Auth0Context } from '../../services/auth0.js';
 
+import ActiveLink from '../ActiveLink.js';
+
 const BsNavLink = props => (
-  <Link href={props.route}>
+  <ActiveLink route={props.route} activeClassName='active'>
     <a className='nav-link port-navbar-link'>{props.title}</a>
-  </Link>
+  </ActiveLink>
 );
+
+// <Link href={props.route}>
+//   <a className='nav-link port-navbar-link'>{props.title}</a>
+// </Link>
 
 const Login = props => {
   return <span

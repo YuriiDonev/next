@@ -18,7 +18,7 @@ class DatePickerWrapper extends React.Component {
           !isEndDateHidden &&
           <div className='input-group'>
             <DatePicker
-              selected={value}
+              selected={value ? moment(value).toDate() : ''}
               onChange={(date) => selectDate(date, label)}
               peekNextMonth
               showMonthDropdown

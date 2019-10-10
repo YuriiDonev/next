@@ -6,6 +6,8 @@ import { Row, Col } from 'reactstrap';
 
 import PortfolioCreateForm from '../components/portfolios/portfolio-create-form.js';
 
+import { createPortfolio } from '../services/endpoints.js';
+
 class PortfolioNew extends Component {
 
   render() {
@@ -15,7 +17,19 @@ class PortfolioNew extends Component {
 
           <Row>
             <Col md='6'>
-              <PortfolioCreateForm />
+              <PortfolioCreateForm
+                initialValues={{
+                  _id: '',
+                  title: '',
+                  description: '',
+                  company: '',
+                  codeUrl: '',
+                  deployedAppLink: '',
+                  language: '',
+                  startDate: '',
+                  endDate: ''
+                }}
+              />
             </Col>
           </Row>
 

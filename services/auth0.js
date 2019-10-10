@@ -67,7 +67,7 @@ class Auth0Provider extends Component {
     await this.state.auth0Client.handleRedirectCallback();
     const user = await this.state.auth0Client.getUser();
 
-    // console.log('user ', user);
+    Cookies.set('portfolio-user', user['http://localhost:3000/rules']);
 
     const token = await this.state.auth0Client.getTokenSilently();
     this.setState({ loading: false });
@@ -95,12 +95,13 @@ class Auth0Provider extends Component {
     this.state.auth0Client.logout(...p);
     localStorage.removeItem('portfolio-token');
     Cookies.remove('portfolio-token');
+    Cookies.remove('portfolio-user');
   }
 
   render() {
     // console.log('this.state ', this.state);
     // console.log('this.props ', this.props);
-    const { isAuthenticatedServer } = this.props;
+    const { isAuthenticatedServer, isSiteOwner } = this.props;
 
     // console.log('isAuthenticatedServer ', isAuthenticatedServer);
 
@@ -108,6 +109,7 @@ class Auth0Provider extends Component {
       <Auth0Context.Provider
         value={{
           isAuthenticated: isAuthenticatedServer || this.clientAuth(),
+          isSiteOwner: isSiteOwner,
           user: this.state.user,
           loading: this.state.loading,
           popupOpen: this.state.popupOpen,

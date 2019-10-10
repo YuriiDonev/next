@@ -1,5 +1,6 @@
 @import './shared/fonts';
 @import './shared/colors';
+@import './shared/mixins';
 
 // PAGES
 @import './index';
@@ -7,6 +8,7 @@
 // COMPONENTS
 @import './header';
 @import './portfolios';
+@import './about';
 
 html, body {
   height:100%;

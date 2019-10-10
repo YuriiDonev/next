@@ -1,16 +1,20 @@
 const express = require('express');
 const next = require('next');
 const routes = require('../routes');
+const cookieParser = require('cookie-parser');
 
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = routes.getRequestHandler(app);
-
 const config = require('./config');
 
 const authService = require('./services/auth.js');
+
+const booksRoutes = require('./routes/book.js');
+const portfolioRoutes = require('./routes/portfolio.js');
 
 const secretData = [
   {
@@ -34,11 +38,15 @@ mongoose.connect(config.DB_URI, { useUnifiedTopology: true, useNewUrlParser: tru
 app.prepare().then(() => {
 
   const server = express();
+  server.use(bodyParser.json());
+  server.use(cookieParser());
+
+  // server.use('/api/v1/books', booksRoutes);
+
+  server.use('/api/v1/portfolios', portfolioRoutes);
 
   server.get('/api/v1/secret', authService.jwtCheck, (req, res) => {
-
     return res.json(secretData);
-
   });
 
   server.get('/portfolio/:id', (req, res) => {

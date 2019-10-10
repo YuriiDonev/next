@@ -29,6 +29,26 @@ export const getSecretData = (req) => (
   _request('/api/v1/secret', null, null, req)
 );
 
+export const getPortfolios = () => (
+  _request('/api/v1/portfolios', null, null, null)
+);
+
+export const getPortfolioById = (id, req) => (
+  _request(`/api/v1/portfolios/${id}`, null, null, req)
+);
+
+export const createPortfolio = (data) => (
+  _request('/api/v1/portfolios', 'POST', data, null)
+);
+
+export const updatePortfolio = (data) => (
+  _request(`/api/v1/portfolios/${data._id}`, 'PATCH', data, null)
+);
+
+export const deletePortfolio = (id) => (
+  _request(`/api/v1/portfolios/${id}`, 'DELETE', null, null)
+);
+
 // export const getSecretDataServer = (req) => (
 //   _request('http://localhost:3000/api/v1/secret', null, null, req)
 // );

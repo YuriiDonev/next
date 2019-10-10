@@ -1,0 +1,20 @@
+
+@mixin animation($animationType) {
+  -webkit-animation: $animationType; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: $animationType; /* Firefox < 16 */
+      -ms-animation: $animationType; /* Internet Explorer */
+       -o-animation: $animationType; /* Opera < 12.1 */
+          animation: $animationType;
+}
+
+@mixin animation-fill-mode($fillMode) {
+  -webkit-animation-fill-mode: $fillMode;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: $fillMode;
+  animation-fill-mode: $fillMode;
+}
+
+@mixin animation-delay($delay) {
+  -webkit-animation-delay: 0.7s;
+  -moz-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
