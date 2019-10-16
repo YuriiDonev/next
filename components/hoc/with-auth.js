@@ -21,7 +21,7 @@ export default function (Component) {
         return <Component {...this.props} />;
       } else {
         return (
-          <BaseLayout>
+          <BaseLayout title={'Authorization'}>
             <BasePage>
               <div className='page-header'>
                 <h1 className='page-header-title'>You are not authenticated. Please login to access this page</h1>

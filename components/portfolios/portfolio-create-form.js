@@ -50,7 +50,6 @@ class PortfolioCreateForm extends Component {
     this.setSubmitting(true);
     this.validateData(() => {
       createPortfolio({
-        _id: '',
         title: this.state.title,
         description: this.state.description,
         company: this.state.company || null,
@@ -160,7 +159,7 @@ class PortfolioCreateForm extends Component {
 
   render() {
 
-    console.log('this.state ', this.state);
+    // console.log('this.state ', this.state);
 
     const { startDate, endDate, error, isEndDateHidden, isSubmitted } = this.state;
 

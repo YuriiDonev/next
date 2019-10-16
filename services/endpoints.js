@@ -7,7 +7,7 @@ const _request = (url, method='GET', data={}, req) => {
 
       const token = getToken(req);
 
-      const fullUrl = req ? `http://localhost:3000${url}` : url;
+      const fullUrl = req ? `${process.env.NAMESPACE}${url}` : url;
 
       const response = await axios({
         method,
@@ -48,7 +48,3 @@ export const updatePortfolio = (data) => (
 export const deletePortfolio = (id) => (
   _request(`/api/v1/portfolios/${id}`, 'DELETE', null, null)
 );
-
-// export const getSecretDataServer = (req) => (
-//   _request('http://localhost:3000/api/v1/secret', null, null, req)
-// );

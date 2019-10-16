@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const next = require('next');
 const routes = require('../routes');
 const cookieParser = require('cookie-parser');
@@ -13,25 +14,20 @@ const config = require('./config');
 
 const authService = require('./services/auth.js');
 
-const booksRoutes = require('./routes/book.js');
 const portfolioRoutes = require('./routes/portfolio.js');
 
-const secretData = [
-  {
-    title: 'Secret Data 1',
-    description: 'This real secret data 1'
-  },
-  {
-    title: 'Secret Data 2',
-    description: 'My secret password'
+const robotsOptions = {
+  root: path.join(__dirname, "../static"),
+  headers: {
+    'Content-Type': 'text/plain;charset=UTF-8'
   }
-];
+};
 
 mongoose.connect(config.DB_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }).then(
   res => {
-    console.log('Connected!!!!');
+    console.log('DB Connected');
   }, err => {
-    console.log('ERROR!!! ', err);
+    console.log('Mongo DB connection ERROR ', err);
   }
 );
 
@@ -41,17 +37,15 @@ app.prepare().then(() => {
   server.use(bodyParser.json());
   server.use(cookieParser());
 
-  // server.use('/api/v1/books', booksRoutes);
-
   server.use('/api/v1/portfolios', portfolioRoutes);
 
-  server.get('/api/v1/secret', authService.jwtCheck, (req, res) => {
-    return res.json(secretData);
+  server.get('/robots.txt', (req, res) => {
+    return res.status(200).sendFile('robots.txt', robotsOptions);
   });
 
-  server.get('/portfolio/:id', (req, res) => {
-    app.render(req, res, '/portfolio', { id: req.params.id });
-  });
+  // server.get('/portfolio/:id', (req, res) => {
+  //   app.render(req, res, '/portfolio', { id: req.params.id });
+  // });
 
   server.get('*', (req, res) => {
     return handle(req, res);
@@ -63,9 +57,11 @@ app.prepare().then(() => {
     }
   });
 
-  server.listen(3000, (err) => {
+  const PORT = process.env.PORT || 3000;
+
+  server.listen(PORT, (err) => {
     if (err) throw err;
-    console.log('> Ready on 3000');
+    console.log(`> Ready on ${PORT}`);
   })
 
 }).catch((ex) => {

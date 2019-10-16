@@ -20,7 +20,7 @@ class PortfolioEdit extends Component {
 
       portfolio = await getPortfolioById(query.id, req);
 
-      console.log('portfolio ', portfolio);
+      // console.log('portfolio ', portfolio);
 
     } catch(e) {
       console.error(e);
@@ -34,7 +34,7 @@ class PortfolioEdit extends Component {
     const { portfolio } = this.props;
 
     return (
-      <BaseLayout>
+      <BaseLayout title={'Edit portfolio'}>
         <BasePage className='portfolio-create-page' title={'Edit portfolio'}>
 
           <Row>

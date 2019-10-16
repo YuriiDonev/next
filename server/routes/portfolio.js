@@ -4,7 +4,8 @@ const authService = require('../services/auth.js');
 
 const portfoliosController = require('../controllers/portfolio.js');
 
-router.post('', authService.jwtCheck,
+router.post('',
+                // authService.jwtCheck,
                 authService.checkRole('siteOwner'),
                 portfoliosController.savePortfolio);
 
@@ -12,11 +13,12 @@ router.get('', portfoliosController.getPortfolios);
 
 router.get('/:id', portfoliosController.getPortfolioById);
 
-router.patch('/:id', authService.jwtCheck,
+router.patch('/:id',
+                    // authService.jwtCheck,
                      authService.checkRole('siteOwner'),
                      portfoliosController.updatePortfolio);
 
-router.delete('/:id', portfoliosController.deletePortfolio,
+router.delete('/:id',
                       authService.checkRole('siteOwner'),
                       portfoliosController.deletePortfolio);
 

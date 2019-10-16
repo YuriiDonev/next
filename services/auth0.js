@@ -3,9 +3,11 @@ import createAuth0Client from "@auth0/auth0-spa-js";
 import { withRouter } from 'next/router';
 import Cookies from 'js-cookie';
 
-
 const DEFAULT_REDIRECT_CALLBACK = () =>
   window.history.replaceState({}, document.title, window.location.pathname);
+
+
+const CLIENT_ID = process.env.CLIENT_ID;
 
 export const Auth0Context = React.createContext();
 
@@ -26,9 +28,8 @@ class Auth0Provider extends Component {
 
       const auth0FromHook = await createAuth0Client({
         domain: 'dev--lew0s-p.eu.auth0.com',
-        client_id: 'fsEcjiFlMrxDEd7amFtfAtH2rH4k6bw0',
-        // redirect_uri: `${window.location.origin}/callback`
-        redirect_uri: `http://localhost:3000/callback`,
+        client_id: CLIENT_ID,
+        redirect_uri: `${process.env.BASE_URL}/callback`,
         audience: 'http://api.localhost:3000/'
       });
 
@@ -67,23 +68,21 @@ class Auth0Provider extends Component {
     await this.state.auth0Client.handleRedirectCallback();
     const user = await this.state.auth0Client.getUser();
 
-    Cookies.set('portfolio-user', user['http://localhost:3000/rules']);
+    Cookies.set('portfolio-user', user[`${process.env.NAMESPACE}/rules`]);
 
     const token = await this.state.auth0Client.getTokenSilently();
     this.setState({ loading: false });
     this.setState({ isAuthenticated: true });
 
-    localStorage.setItem('portfolio-token', token);
     Cookies.set('portfolio-token', token);
-
 
     this.setState({ user, token });
   }
 
   clientAuth = () => {
-    if (typeof localStorage !== 'undefined') {
-      const isAuthenticated = localStorage.getItem('portfolio-token');
-      if (isAuthenticated) {
+    if (typeof document !== 'undefined' && document.cookie) {
+      const token = document.cookie.split(';').find(c => c.trim().startsWith('portfolio-token='));
+      if (token) {
         return true;
       } else {
         return false;

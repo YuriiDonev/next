@@ -12,7 +12,7 @@ class PortfolioNew extends Component {
 
   render() {
     return (
-      <BaseLayout>
+      <BaseLayout title={'Create new portfolio'}>
         <BasePage className='portfolio-create-page' title={'Create new portfolio'}>
 
           <Row>

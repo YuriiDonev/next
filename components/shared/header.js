@@ -67,15 +67,20 @@ class Header extends Component {
   static contextType = Auth0Context;
 
   render() {
-
     // console.log('Header this.context ', this.context);
-
     const { isAuthenticated, loginWithPopup, loginWithRedirect, logout } = this.context;
     const { classNameHeader } = this.props;
+    const { isOpen } = this.state;
+
+    const menuOpentClass = isOpen ? 'menu-open' : 'menu-close';
 
     return (
       <div>
-        <Navbar className={`port-navbar port-nav-base absolute ${classNameHeader}`} color="transparent" dark expand="md">
+        <Navbar
+          className={`port-navbar port-nav-base absolute ${classNameHeader} ${menuOpentClass}`}
+          color="transparent"
+          dark expand="md"
+        >
           <NavbarBrand className='port-navbar-brand' href="/">Yurii Donev</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>

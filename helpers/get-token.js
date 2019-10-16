@@ -8,8 +8,6 @@ export const getToken = (req) => {
         token = cookie.split('=')[1];
       }
     }
-  } else {
-    token = localStorage.getItem('portfolio-token');
   }
   return token;
 }

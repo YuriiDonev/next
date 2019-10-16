@@ -25,7 +25,7 @@ class Index extends Component {
   animateCard = () => {
     this.cardAnimationInterval = setInterval(() => {
       this.setState({ isFlipping: !this.state.isFlipping });
-    }, 5000);
+    }, 10000);
   }
 
   componentWillUnmount() {
@@ -35,14 +35,17 @@ class Index extends Component {
   }
 
   render() {
-
     const { isFlipping } = this.state;
 
     return (
-      <BaseLayout className={`cover ${isFlipping ? 'cover-1' : 'cover-0'}`} headerType={'index'}>
+      <BaseLayout
+        title={'Yurii Donev - Portfolio'}
+        className={`cover ${isFlipping ? 'cover-1' : 'cover-0'}`}
+        headerType={'index'}
+      >
         <div className="main-section">
           <div className="background-image">
-            <img src="/static/images/background-index.png" />
+            <img src="/static/images/background-index.png" alt="" />
           </div>
 
           <Container>
@@ -58,7 +61,7 @@ class Index extends Component {
                           Have a look at my portfolio and job history
                         </div>
                       </div>
-                      <img className="image" src="/static/images/section-1.png"/>
+                      <img className="image" src="/static/images/section-1.png" alt='Yurii Donev developer' />
                       <div className="shadow-custom">
                         <div className="shadow-inner"> </div>
                       </div>
@@ -71,7 +74,7 @@ class Index extends Component {
                           Professional and top quality service in web development
                         </div>
                       </div>
-                      <img className="image" src="/static/images/section-2.png"/>
+                      <img className="image" src="/static/images/section-2.png" alt='Yurii Donev developer' />
                       <div className="shadow-custom shadow-custom-2">
                         <div className="shadow-inner"> </div>
                       </div>
@@ -101,17 +104,25 @@ class Index extends Component {
                 />
 
                 <div className="hero-welcome-bio">
-                  <h1>
+                  <h2>
                     Let's take a look on my work.
-                  </h1>
+                  </h2>
                 </div>
               </Col>
             </Row>
           </Container>
         </div>
+        <a
+          className='service-link'
+          href="https://www.vecteezy.com/free-vector/programming"
+          target="_blank"
+        >Programming Vectors by Vecteezy</a>
       </BaseLayout>
     );
   }
 }
 
 export default Index;
+
+
+// https://yuriidonev.herokuapp.com/

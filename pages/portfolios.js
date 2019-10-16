@@ -1,18 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import Link from 'next/link';
-import BaseLayout from '../components/layouts/base-layout.js';
-
 import Router from 'next/router';
-
 import { Col, Row, Card, CardHeader, CardBody, CardText, CardTitle, Button } from 'reactstrap';
-
+import BaseLayout from '../components/layouts/base-layout.js';
 import BasePage from '../components/BasePage.js';
-
+import PortfolioCard from '../components/portfolios/portfolio-card.js';
 import { getPortfolios, deletePortfolio } from '../services/endpoints.js';
 import { Auth0Context } from '../services/auth0.js';
-
-// import ModalExample from '../components/portfolio-modal';
-import PortfolioCard from '../components/portfolios/portfolio-card.js';
 
 class Portfolios extends Component {
 
@@ -37,9 +31,7 @@ class Portfolios extends Component {
   async componentDidMount() {
     let portfolios = [];
     try {
-      // const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
       const res = await getPortfolios();
-      // console.log('res portfolios ', res);
       this.setState({ portfolios: res });
     } catch(err) {
       console.error(err);
@@ -60,7 +52,6 @@ class Portfolios extends Component {
   }
 
   renderPosts = (portfolios, isAuthenticated, isSiteOwner) => {
-    // const { isModalOpen } = this.state;
     return portfolios.map(portfolio =>
       <Col md="4" key={portfolio._id}>
         <PortfolioCard portfolio={portfolio} >
@@ -95,8 +86,6 @@ class Portfolios extends Component {
   static contextType = Auth0Context;
 
   render() {
-    // console.log('this.props ', this.props);
-    // const { portfolios } = this.props;
     const { portfolios } = this.state;
 
     const { isAuthenticated, isSiteOwner } = this.context;
@@ -105,18 +94,16 @@ class Portfolios extends Component {
     // console.log('isSiteOwner ', isSiteOwner);
 
     return (
-      <BaseLayout>
+      <BaseLayout title={'Portfolios'}>
         <BasePage className={'portfolio-page'} title={'Portfolios'}>
-
           {
             (isAuthenticated && isSiteOwner) &&
             <Button
-              onClick={() => Router.push('/portfolioNew')}
+              onClick={() => Router.push('/portfolio/new')}
               color='success'
               className='create-portfolio-btn'
-            >Crete Portfolio</Button>
+            >Create Portfolio</Button>
           }
-
           <Row>
             { this.renderPosts(portfolios, isAuthenticated, isSiteOwner) }
           </Row>
@@ -127,9 +114,3 @@ class Portfolios extends Component {
 }
 
 export default Portfolios;
-
-// <li key={post.id}>
-//  <Link as={`/portfolio/${post.id}`} href={`/portfolio?id=${post.id}`}>
-//    <a>{post.title}</a>
-//  </Link>
-//</li>

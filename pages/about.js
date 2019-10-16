@@ -8,7 +8,7 @@ class About extends Component {
 
   render() {
     return (
-      <BaseLayout>
+      <BaseLayout title={'About Yurii Donev'}>
         <BasePage className='about-page'>
           <Row className="mt-5">
             <Col md="6">

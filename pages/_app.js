@@ -10,11 +10,8 @@ class MyApp extends App {
 
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
-
     let isAuthenticatedServer = false;
-
     let isSiteOwner = false;
-
     if (!process.browser) {
       if (ctx.req.headers.cookie) {
         if (ctx.req.cookies['portfolio-user'] === 'siteOwner') {
@@ -43,8 +40,6 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, isAuthenticatedServer, isSiteOwner } = this.props;
-
-    // console.log('isAuthenticatedServer ', isAuthenticatedServer);
 
     return (
       <Container>

@@ -29,7 +29,7 @@ class CallbackPage extends Component {
 
   render() {
     return (
-      <BaseLayout>
+      <BaseLayout title={'Authorization'}>
         <BasePage>
           <div> Verifying loading data... </div>
         </BasePage>
@@ -39,39 +39,3 @@ class CallbackPage extends Component {
 }
 
 export default withRouter(CallbackPage);
-
-
-// function (user, context, callback) {
-//   user.app._metadata = user.app._metadata || {};
-//   var addRolesToUser = function (user, cb) {
-//     if (user.email === 'yurii.donev@gmail.com') {
-//       cb(null, 'siteOwner');
-//     } else {
-//       cb(null, 'guest');
-//     }
-//   };
-//
-//   addRolesToUser(user, function(err, roles) {
-//     if (err) {
-//       callback(err);
-//     } esle {
-//       user.app._metadata.roles = roles;
-//       auth0.users.updateAppMetadata(user.user_id, user.app_metadata)
-//         .then(function() {
-//           callback(null, user, context);
-//         })
-//         .catch(function(err) {
-//           callback(err);
-//         })
-//     }
-//   });
-// }
-
-
-// function (user, context, callback) {
-//   if (user.email === 'yurii.donev@gmail.com') {
-//   	context.idToken['http://localhost:3000/rules'] = 'siteOwner';
-//   } else {
-//   	context.idToken['http://localhost:3000/rules'] = 'guest';
-//   }
-// }

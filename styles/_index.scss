@@ -72,12 +72,12 @@
 
 .hero-welcome-wrapper {
   justify-content: flex-end;
-
 }
 
 @media (max-width: 991px) {
   .hero-section {
     width: 341px;
+    height: 445px;
 
     &-content {
       width: 341px;
@@ -124,8 +124,6 @@
 }
 
 
-
-
 .flipper {
   transition: 1s;
   transform-style: preserve-3d;
@@ -150,4 +148,9 @@
 
 .back {
   transform: rotateY(180deg);
+}
+
+.service-link {
+  position: absolute;
+  bottom: 0;
 }
