@@ -124,5 +124,5 @@ class Index extends Component {
 
 export default Index;
 
-
+// "start": "set NODE_ENV=production&&node server/index.js",
 // https://yuriidonev.herokuapp.com/
