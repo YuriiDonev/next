@@ -91,7 +91,8 @@ class Auth0Provider extends Component {
   }
 
   logout = (...p) => {
-    this.state.auth0Client.logout(...p);
+    // this.state.auth0Client.logout(...p);
+    this.state.auth0Client.logout({...p, returnTo: process.env.BASE_URL});
     localStorage.removeItem('portfolio-token');
     Cookies.remove('portfolio-token');
     Cookies.remove('portfolio-user');

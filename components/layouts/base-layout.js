@@ -19,6 +19,9 @@ const BaseLayout = (props) => {
 
         <link rel='icon' type='image/ico' href='/static/favicon.ico' />
 
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap' rel='stylesheet' />
+
+
       </Head>
       <div className="layout-container">
         <Header classNameHeader={`port-nav-${headerType}`} {...props} />

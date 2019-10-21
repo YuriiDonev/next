@@ -4,7 +4,7 @@ import Typed from 'react-typed';
 
 import { Container, Button, Row, Col } from 'reactstrap';
 
-const strings = ['Full stack developer', 'React.js', 'Angular', 'Angular 2+'];
+const strings = ['Full stack developer', 'React.js', 'Node.js', 'Next.js', 'Angular', 'Angular 2+', 'Express.js'];
 
 import { getPortfolios } from '../services/endpoints.js';
 
@@ -25,7 +25,7 @@ class Index extends Component {
   animateCard = () => {
     this.cardAnimationInterval = setInterval(() => {
       this.setState({ isFlipping: !this.state.isFlipping });
-    }, 10000);
+    }, 20000);
   }
 
   componentWillUnmount() {
@@ -61,7 +61,7 @@ class Index extends Component {
                           Have a look at my portfolio and job history
                         </div>
                       </div>
-                      <img className="image" src="/static/images/section-1.png" alt='Yurii Donev developer' />
+                      <img className="image" src="/static/images/section-1.jpg" alt='Yurii Donev developer' />
                       <div className="shadow-custom">
                         <div className="shadow-inner"> </div>
                       </div>
@@ -74,7 +74,7 @@ class Index extends Component {
                           Professional and top quality service in web development
                         </div>
                       </div>
-                      <img className="image" src="/static/images/section-2.png" alt='Yurii Donev developer' />
+                      <img className="image" src="/static/images/section-2.jpg" alt='Yurii Donev developer' />
                       <div className="shadow-custom shadow-custom-2">
                         <div className="shadow-inner"> </div>
                       </div>

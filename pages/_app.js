@@ -25,7 +25,7 @@ class MyApp extends App {
     } else {
       if (document.cookie) {
         const siteOwnerCookiie = document.cookie.split(';').find(c => c.trim().startsWith('portfolio-user='));
-        if (siteOwnerCookiie.trim() === 'portfolio-user=siteOwner') {
+        if (siteOwnerCookiie && siteOwnerCookiie.trim() === 'portfolio-user=siteOwner') {
           isSiteOwner = true;
         }
       }
@@ -52,5 +52,3 @@ class MyApp extends App {
 }
 
 export default MyApp;
-
-// The package could not be installed. No valid plugins were found.
