@@ -12,25 +12,15 @@ class PortfolioEdit extends Component {
 
   static async getInitialProps({ req, query }) {
     let portfolio = {};
-
-    // console.log('query ', query);
-    // console.log('req.headers.cookie ', req.headers.cookie);
-
     try {
-
       portfolio = await getPortfolioById(query.id, req);
-
-      // console.log('portfolio ', portfolio);
-
     } catch(e) {
       console.error(e);
     }
     return { portfolio };
   }
 
-
   render() {
-
     const { portfolio } = this.props;
 
     return (

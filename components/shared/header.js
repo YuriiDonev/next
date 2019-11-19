@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
-import { Link as NextLink } from '../../routes.js';
 import {
   Collapse,
   Navbar,
@@ -13,9 +11,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-
 import { Auth0Context } from '../../services/auth0.js';
-
 import ActiveLink from '../ActiveLink.js';
 
 const BsNavLink = props => (
@@ -24,18 +20,14 @@ const BsNavLink = props => (
   </ActiveLink>
 );
 
-// <Link href={props.route}>
-//   <a className='nav-link port-navbar-link'>{props.title}</a>
-// </Link>
-
-const Login = props => {
-  return <span
+const Login = props => (
+  <span
     className='nav-link port-navbar-link clickable'
     onClick={props.login}
-         >
+  >
     Login
   </span>
-};
+);
 
 const Logout = props => (
   <span
@@ -45,7 +37,6 @@ const Logout = props => (
     Logout
   </span>
 );
-
 
 class Header extends Component {
   constructor(props) {
@@ -67,11 +58,9 @@ class Header extends Component {
   static contextType = Auth0Context;
 
   render() {
-    // console.log('Header this.context ', this.context);
     const { isAuthenticated, loginWithPopup, loginWithRedirect, logout } = this.context;
     const { classNameHeader } = this.props;
     const { isOpen } = this.state;
-
     const menuOpentClass = isOpen ? 'menu-open' : 'menu-close';
 
     return (
@@ -82,6 +71,7 @@ class Header extends Component {
           dark expand="md"
         >
           <NavbarBrand className='port-navbar-brand' href="/">Yurii Donev</NavbarBrand>
+          <img className="avatar" src="/static/images/donev_avatar.jpg" alt='full stack developer' />
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -97,22 +87,18 @@ class Header extends Component {
               <NavItem className='port-navbar-item'>
                 <BsNavLink route='/cv' title='CV' />
               </NavItem>
-
               {
                 !isAuthenticated &&
                 <NavItem className='port-navbar-item'>
                   <Login login={ loginWithRedirect } />
                 </NavItem>
               }
-
               {
                 isAuthenticated &&
                 <NavItem className='port-navbar-item'>
                   <Logout logout={ logout } />
                 </NavItem>
               }
-
-
             </Nav>
           </Collapse>
         </Navbar>

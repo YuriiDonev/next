@@ -1,53 +1,67 @@
 import React, { Component, Fragment } from 'react';
-
+import _ from 'lodash';
 import { Col, Row, Card, CardHeader, CardBody, CardText, CardTitle, Button } from 'reactstrap';
-
-
-import ModalExample from '../portfolio-modal';
+import ModalPortfolio from '../portfolio-modal';
 
 class PortfolioCard extends Component {
-
   state = {
     isModalOpen: false
   }
-
 
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   }
 
-
   render() {
-    // console.log('this.props ', this.props);
     const { portfolio, children } = this.props;
     const { isModalOpen } = this.state;
+    // No photo placeholder: https://i.ibb.co/R0jh0Cd/nophoto-placeholder.jpg
 
     return (
-
       <Fragment>
-
-        <ModalExample isOpen={isModalOpen} toggleModal={this.toggleModal} portfolio={portfolio} />
+        <ModalPortfolio isOpen={isModalOpen} toggleModal={this.toggleModal} portfolio={portfolio} />
 
         <span onClick={this.toggleModal}>
           <Card className="portfolio-card">
-
             <CardHeader className="portfolio-card-header">{portfolio.title}</CardHeader>
 
             <CardBody>
 
-              <p className="portfolio-card-city">{portfolio.description} </p>
+              {
+                portfolio.imgUrl &&
+                <div className="img-container">
+                  <img width="100%" src={portfolio.imgUrl} alt="Card image cap"
+                    loading="lazy"
+                  />
+                </div>
+              }
 
-              <CardTitle className="portfolio-card-title">{portfolio.company}</CardTitle>
+              {
+                portfolio.appGoal &&
+                <Fragment>
+                  <b>{'Application Goal:'}</b>
+                  <p>{portfolio.appGoal}</p>
+                </Fragment>
+              }
 
-              <CardText className="portfolio-card-text">{portfolio.language}</CardText>
+              <b>{'Description:'}</b>
+              <p>
+                {
+                  _.truncate(portfolio.description, { 'length': 100 })
+                }
+                {
+                  portfolio.description.length > 100 &&
+                  <b>{' read more'}</b>
+                }
+              </p>
 
-              <CardText className="portfolio-card-text">{portfolio.codeUrl}</CardText>
-              <CardText className="portfolio-card-text">{portfolio.deployedAppLink}</CardText>
-
-              <CardText className="portfolio-card-text">{portfolio.startDate}</CardText>
-              <CardText className="portfolio-card-text">{portfolio.endDate}</CardText>
-
-              <div className="readMore"> </div>
+              {
+                portfolio.language &&
+                <Fragment>
+                  <b>{'Tech Stack:'}</b>
+                  <p>{portfolio.language}</p>
+                </Fragment>
+              }
 
               {
                 children

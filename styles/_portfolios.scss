@@ -57,4 +57,30 @@
   margin-bottom: 20px;
 }
 
+.portfolio-card-header {
+  &.card-header {
+    text-align: left;
+    padding: .75rem 1.25rem;
+  }
+}
+
+.img-container {
+  max-height: 170px;
+  margin-bottom: 10px;
+  img {
+    height: 170px;
+    object-fit: cover;
+  }
+  &.modal-img {
+    max-height: 250px;
+    img {
+      height: 250px;
+    }
+  }
+}
+
+.modal-block {
+  margin-bottom: 1rem;
+}
+
 // --------- PORTFOLIO PAGE -------------

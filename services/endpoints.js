@@ -4,11 +4,8 @@ import { getToken } from '../helpers/get-token.js';
 const _request = (url, method='GET', data={}, req) => {
   return new Promise( async (resolve, reject) => {
     try {
-
       const token = getToken(req);
-
       const fullUrl = req ? `${process.env.NAMESPACE}${url}` : url;
-
       const response = await axios({
         method,
         url: fullUrl,

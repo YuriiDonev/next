@@ -10,6 +10,10 @@
     opacity: 0;
     @include animation(fadein 2s);
     @include animation-fill-mode(forwards);
+
+    h2 {
+      margin-bottom: 20px;
+    }
   }
 
   .title {
@@ -32,8 +36,28 @@
     font-size: 18px;
   }
 
+  .about-img-container {
+    display: flex;
+    justify-content: center;
+    margin: 2em 0;
+    img {
+      height: 300px;
+    }
+  }
+
   @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .about-page {
+    .about-img-container {
+      img {
+        width: 400px;
+        object-fit: contain;
+      }
+    }
   }
 }

@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import BaseLayout from '../components/layouts/base-layout.js';
 import Typed from 'react-typed';
+import Link from 'next/link';
 
 import { Container, Button, Row, Col } from 'reactstrap';
 
-const strings = ['Full stack developer', 'React.js', 'Node.js', 'Next.js', 'Angular', 'Angular 2+', 'Express.js'];
+const strings = [
+  'React.js',
+  'React-Native',
+  'Next.js SSR Server Side Rendering',
+  'Angular.js',
+  'Angular 2+',
+  'Node.js',
+  'Express.js',
+  'PWA Progressive Web Application'
+];
 
 import { getPortfolios } from '../services/endpoints.js';
 
 class Index extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +34,7 @@ class Index extends Component {
   animateCard = () => {
     this.cardAnimationInterval = setInterval(() => {
       this.setState({ isFlipping: !this.state.isFlipping });
-    }, 20000);
+    }, 15000);
   }
 
   componentWillUnmount() {
@@ -86,8 +95,22 @@ class Index extends Component {
               <Col md="6" className="hero-welcome-wrapper">
                 <div className="hero-welcome-text">
                   <h1>
-                    Welcome to the portfolio website of Yurii Donev.
-                    Get informed, collaborate and discover projects I was working on through the years!
+                    Welcome to the portfolio website of Yurii Donev. It's created with SSR server side rendering technology
+                  </h1>
+                </div>
+
+                <div className="hero-welcome-bio">
+                  <h2>
+                    To be awared about current application goal, which problem it solves and why SSR is cool follow this <Link href={'/about'}><a>LINK</a></Link>
+                  </h2>
+                  <h2>
+                    Take a look on my work <Link href={'/portfolios'}><a>HERE</a></Link>
+                  </h2>
+                </div>
+
+                <div className="hero-welcome-text">
+                  <h1 className="h1-subheader">
+                    My tech stack:
                   </h1>
                 </div>
 
@@ -103,11 +126,6 @@ class Index extends Component {
                   className="self-typed"
                 />
 
-                <div className="hero-welcome-bio">
-                  <h2>
-                    Let's take a look on my work.
-                  </h2>
-                </div>
               </Col>
             </Row>
           </Container>

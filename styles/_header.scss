@@ -3,7 +3,7 @@
 .port-navbar.port-nav-base {
   width: 100%;
   z-index: 15;
-  padding: 40px;
+  padding: 30px;
 
   .port-navbar {
     &-brand {
@@ -46,4 +46,12 @@
 
 .bg-transparent.menu-close {
   transition: 0.7s;
+}
+
+.avatar {
+  position: absolute;
+  top: 18px;
+  left: 230px;
+  height: 70px;
+  border-radius: .25rem;
 }

@@ -9,20 +9,6 @@ import { getPortfolios, deletePortfolio } from '../services/endpoints.js';
 import { Auth0Context } from '../services/auth0.js';
 
 class Portfolios extends Component {
-
-  // static async getInitialProps() {
-  //   let portfolios = [];
-  //   try {
-  //     // const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-  //     const res = await getPortfolios();
-  //     console.log('res ', res);
-  //     portfolios = res;
-  //   } catch(err) {
-  //     console.error(err);
-  //   }
-  //   return { portfolios };
-  // }
-
   state = {
     portfolios: [],
     isModalOpen: false
@@ -40,7 +26,8 @@ class Portfolios extends Component {
 
   nanigateToEdit = (e, portfolioId) => {
     e.stopPropagation();
-    Router.pushRoute(`/portfolio/${portfolioId}/edit`);
+    // Router.pushRoute(`/portfolio/${portfolioId}/edit`);
+    Router.push({ pathname: `/portfolio/${portfolioId}/edit` });
   }
 
   showDeletePortfolioWarn = (e, name, id) => {
@@ -87,11 +74,7 @@ class Portfolios extends Component {
 
   render() {
     const { portfolios } = this.state;
-
     const { isAuthenticated, isSiteOwner } = this.context;
-
-    // console.log('isAuthenticated ', isAuthenticated);
-    // console.log('isSiteOwner ', isSiteOwner);
 
     return (
       <BaseLayout title={'Portfolios'}>

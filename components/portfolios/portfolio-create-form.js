@@ -1,22 +1,47 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Router } from '../../routes.js';
-
-import { Form, Input, Button, FormGroup, Label, Alert } from 'reactstrap';
-
+import { Form, Button, Alert } from 'reactstrap';
 import DatePickerWrapper from '../datepicker';
-
 import { createPortfolio, updatePortfolio } from '../../services/endpoints.js';
+import FormGroupComponent from './form-group-component.js';
+
+const clearState = {
+  _id: '',
+  title: '',
+  description: '',
+  appGoal: '',
+  company: '',
+  codeUrl: '',
+  deployedAppLink: '',
+  imgUrl: '',
+  language: '',
+  startDate: '',
+  endDate: '',
+  error: ''
+};
+
+const checkIsValidURL = (str) => {
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return !!pattern.test(str);
+}
 
 class PortfolioCreateForm extends Component {
 
   state = {
     _id: this.props.initialValues._id || '',
     title: this.props.initialValues.title || '',
+    appGoal: this.props.initialValues.appGoal || '',
     description: this.props.initialValues.description || '',
     company: this.props.initialValues.company || '',
     codeUrl: this.props.initialValues.codeUrl || '',
     deployedAppLink: this.props.initialValues.deployedAppLink || '',
+    imgUrl: this.props.initialValues.imgUrl || '',
     language: this.props.initialValues.language || '',
     startDate: this.props.initialValues.startDate || '',
     endDate: this.props.initialValues.endDate || '',
@@ -24,18 +49,6 @@ class PortfolioCreateForm extends Component {
     isEndDateHidden: false,
     isSubmitted: false
   }
-
-  // componentDidUpdate() {
-  //
-  //   const { initialValues } = this.props;
-  //
-  //   console.log('initialValues ', initialValues);
-  //
-  //   if (this.state.title !== initialValues.title) {
-  //     this.setState({ title: initialValues.title });
-  //   }
-  //
-  // }
 
   handleChange = (event) => {
     const field = event.target.name;
@@ -51,26 +64,17 @@ class PortfolioCreateForm extends Component {
     this.validateData(() => {
       createPortfolio({
         title: this.state.title,
+        appGoal: this.state.appGoal || null,
         description: this.state.description,
         company: this.state.company || null,
-        codeUrl: this.state.codeUrl,
+        codeUrl: this.state.codeUrl || null,
         deployedAppLink: this.state.deployedAppLink || null,
+        imgUrl: this.state.imgUrl || null,
         language: this.state.language || null,
         startDate: this.state.startDate || null,
         endDate: this.state.endDate || null
       }).then(res => {
-        this.setState({
-          _id: '',
-          title: '',
-          description: '',
-          company: '',
-          codeUrl: '',
-          deployedAppLink: '',
-          language: '',
-          startDate: '',
-          endDate: '',
-          error: ''
-        });
+        this.setState(clearState);
         this.setSubmitting(false);
         Router.pushRoute('/portfolios');
       }, err => {
@@ -92,28 +96,20 @@ class PortfolioCreateForm extends Component {
       updatePortfolio({
         _id: this.state._id,
         title: this.state.title,
+        appGoal: this.state.appGoal || null,
         description: this.state.description,
         company: this.state.company || null,
-        codeUrl: this.state.codeUrl,
+        codeUrl: this.state.codeUrl || null,
         deployedAppLink: this.state.deployedAppLink || null,
+        imgUrl: this.state.imgUrl || null,
         language: this.state.language || null,
         startDate: this.state.startDate || null,
         endDate: this.state.endDate || null
       }).then(res => {
-        this.setState({
-          _id: '',
-          title: '',
-          description: '',
-          company: '',
-          codeUrl: '',
-          deployedAppLink: '',
-          language: '',
-          startDate: '',
-          endDate: '',
-          error: ''
-        });
+        this.setState(clearState);
         this.setSubmitting(false);
-        Router.pushRoute('/portfolios');
+        // Router.pushRoute('/portfolios');
+        Router.push({ pathname: '/portfolios' });
       }, err => {
         if (err && err.response && err.response.data && err.response.data.message) {
           this.setState({ error: err.response.data.message });
@@ -127,12 +123,23 @@ class PortfolioCreateForm extends Component {
   }
 
   validateData = (cb) => {
-    const { title, description, codeUrl } = this.state;
-    if (!title || !description || !codeUrl) {
+    const { title, description, codeUrl, imgUrl } = this.state;
+    if (!title || !description) {
       this.setState({ error: 'Fields marked as * are required' });
-    } else {
-      cb();
+      return;
     }
+    if (codeUrl) {
+      const isValidUrl = checkIsValidURL(codeUrl);
+      if (!isValidUrl) {
+        this.setState({ error: 'Application Code URL is not valid' });
+        return;
+      }
+    }
+    if (imgUrl && !checkIsValidURL(imgUrl)) {
+      this.setState({ error: 'Image URL is not valid' });
+      return;
+    }
+    cb();
   }
 
   selectDate = (date, label) => {
@@ -158,84 +165,72 @@ class PortfolioCreateForm extends Component {
   }
 
   render() {
-
-    // console.log('this.state ', this.state);
-
     const { startDate, endDate, error, isEndDateHidden, isSubmitted } = this.state;
-
     const { isEdit } = this.props;
 
     return (
       <Form onSubmit={(e) => { isEdit ? this.updatePortfolio(e) : this.createNewPortfolio(e) }}>
-
-        <FormGroup>
-          <Label>Title*</Label>
-          <Input
-            type="text"
-            name='title'
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label>Description*</Label>
-          <Input
-            type="textarea"
-            name='description'
-            value={this.state.description}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label>Application Code*</Label>
-          <Input
-            type="text"
-            name='codeUrl'
-            value={this.state.codeUrl}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label>Deployed Application</Label>
-          <Input
-            type="text"
-            name='deployedAppLink'
-            value={this.state.deployedAppLink}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label>Company</Label>
-          <Input
-            type="text"
-            name='company'
-            value={this.state.company}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Label>Pick main technology:</Label>
-          <div className='input-group'>
-            <select className='form-control' name='language' value={this.state.language} onChange={this.handleChange}>
-              <option value="react">React</option>
-              <option value="angular">Angular</option>
-              <option value="vue">Vue</option>
-              <option value="javascript">Javascript</option>
-            </select>
-          </div>
-        </FormGroup>
-
+        <FormGroupComponent
+          title='Title*'
+          type='text'
+          name='title'
+          value={this.state.title}
+          onChangeHandler={this.handleChange}
+        />
+        <FormGroupComponent
+          title='Application goal'
+          type='textarea'
+          name='appGoal'
+          value={this.state.appGoal}
+          onChangeHandler={this.handleChange}
+        />
+        <FormGroupComponent
+          title='Description*'
+          type='textarea'
+          name='description'
+          value={this.state.description}
+          onChangeHandler={this.handleChange}
+        />
+        <FormGroupComponent
+          title='Application Code'
+          type='text'
+          name='codeUrl'
+          value={this.state.codeUrl}
+          onChangeHandler={this.handleChange}
+        />
+        <FormGroupComponent
+          title='Deployed Application'
+          type='text'
+          name='deployedAppLink'
+          value={this.state.deployedAppLink}
+          onChangeHandler={this.handleChange}
+        />
+        <FormGroupComponent
+          title='Image URL'
+          type='text'
+          name='imgUrl'
+          value={this.state.imgUrl}
+          onChangeHandler={this.handleChange}
+        />
+        <FormGroupComponent
+          title='Company'
+          type='text'
+          name='company'
+          value={this.state.company}
+          onChangeHandler={this.handleChange}
+        />
+        <FormGroupComponent
+          title='Tech Stack'
+          type='text'
+          name='language'
+          value={this.state.language}
+          onChangeHandler={this.handleChange}
+        />
         <DatePickerWrapper
           label={'Start date:'}
           value={startDate}
           selectDate={this.selectDate}
         />
-
         <DatePickerWrapper
           label={'End date:'}
           value={endDate}
@@ -243,19 +238,16 @@ class PortfolioCreateForm extends Component {
           isEndDateHidden={isEndDateHidden}
           toggleDate={this.toggleDate}
         />
-
         {
           error &&
           <Alert color="danger">{error}</Alert>
         }
-
         <Button
           type='submit'
           color='primary'
           size='lg'
           disabled={isSubmitted}
         >{ isEdit ? 'Edit' : 'Create' }</Button>
-
       </Form>
     );
   }
