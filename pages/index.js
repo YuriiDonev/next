@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import BaseLayout from '../components/layouts/base-layout.js';
 import Typed from 'react-typed';
 import Link from 'next/link';
-
 import { Container, Button, Row, Col } from 'reactstrap';
 
 const strings = [
@@ -56,7 +55,6 @@ class Index extends Component {
           <div className="background-image">
             <img src="/static/images/background-index.png" alt="" />
           </div>
-
           <Container>
             <Row>
               <Col md="6">
@@ -88,7 +86,6 @@ class Index extends Component {
                         <div className="shadow-inner"> </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </Col>
@@ -98,7 +95,6 @@ class Index extends Component {
                     Welcome to the portfolio website of Yurii Donev. It's created with SSR server side rendering technology
                   </h1>
                 </div>
-
                 <div className="hero-welcome-bio">
                   <h2>
                     To be awared about current application goal, which problem it solves and why SSR is cool follow this <Link href={'/about'}><a>LINK</a></Link>
@@ -107,13 +103,11 @@ class Index extends Component {
                     Take a look on my work <Link href={'/portfolios'}><a>HERE</a></Link>
                   </h2>
                 </div>
-
                 <div className="hero-welcome-text">
                   <h1 className="h1-subheader">
                     My tech stack:
                   </h1>
                 </div>
-
                 <Typed
                   loop
                   typeSpeed={60}
@@ -125,7 +119,6 @@ class Index extends Component {
                   cursorChar="|"
                   className="self-typed"
                 />
-
               </Col>
             </Row>
           </Container>
@@ -141,6 +134,3 @@ class Index extends Component {
 }
 
 export default Index;
-
-// "start": "set NODE_ENV=production&&node server/index.js",
-// https://yuriidonev.herokuapp.com/

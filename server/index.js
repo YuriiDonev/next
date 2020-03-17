@@ -4,7 +4,6 @@ const path = require('path');
 const next = require('next');
 const routes = require('../routes');
 const cookieParser = require('cookie-parser');
-
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
@@ -14,7 +13,6 @@ const handle = routes.getRequestHandler(app);
 const config = require('./config');
 
 const authService = require('./services/auth.js');
-
 const portfolioRoutes = require('./routes/portfolio.js');
 
 const robotsOptions = {
@@ -44,10 +42,6 @@ app.prepare().then(() => {
   server.get('/robots.txt', (req, res) => {
     return res.status(200).sendFile('robots.txt', robotsOptions);
   });
-
-  // server.get('/portfolio/:id', (req, res) => {
-  //   app.render(req, res, '/portfolio', { id: req.params.id });
-  // });
 
   server.get('*', (req, res) => {
     return handle(req, res);

@@ -15,18 +15,14 @@ class PortfolioCard extends Component {
   render() {
     const { portfolio, children } = this.props;
     const { isModalOpen } = this.state;
-    // No photo placeholder: https://i.ibb.co/R0jh0Cd/nophoto-placeholder.jpg
 
     return (
       <Fragment>
         <ModalPortfolio isOpen={isModalOpen} toggleModal={this.toggleModal} portfolio={portfolio} />
-
         <span onClick={this.toggleModal}>
           <Card className="portfolio-card">
             <CardHeader className="portfolio-card-header">{portfolio.title}</CardHeader>
-
             <CardBody>
-
               {
                 portfolio.imgUrl &&
                 <div className="img-container">
@@ -35,7 +31,6 @@ class PortfolioCard extends Component {
                   />
                 </div>
               }
-
               {
                 portfolio.appGoal &&
                 <Fragment>
@@ -43,7 +38,6 @@ class PortfolioCard extends Component {
                   <p>{portfolio.appGoal}</p>
                 </Fragment>
               }
-
               <b>{'Description:'}</b>
               <p>
                 {
@@ -54,7 +48,6 @@ class PortfolioCard extends Component {
                   <b>{' read more'}</b>
                 }
               </p>
-
               {
                 portfolio.language &&
                 <Fragment>
@@ -62,13 +55,10 @@ class PortfolioCard extends Component {
                   <p>{portfolio.language}</p>
                 </Fragment>
               }
-
               {
                 children
               }
-
             </CardBody>
-
           </Card>
         </span>
       </Fragment>

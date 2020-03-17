@@ -26,7 +26,6 @@ class Portfolios extends Component {
 
   nanigateToEdit = (e, portfolioId) => {
     e.stopPropagation();
-    // Router.pushRoute(`/portfolio/${portfolioId}/edit`);
     Router.push({ pathname: `/portfolio/${portfolioId}/edit` });
   }
 

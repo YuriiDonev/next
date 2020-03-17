@@ -3,9 +3,7 @@ import BaseLayout from '../components/layouts/base-layout.js';
 import BasePage from '../components/BasePage.js';
 import withAuth from '../components/hoc/with-auth.js';
 import { Row, Col } from 'reactstrap';
-
 import PortfolioCreateForm from '../components/portfolios/portfolio-create-form.js';
-
 import { getPortfolioById } from '../services/endpoints.js';
 
 class PortfolioEdit extends Component {
@@ -26,7 +24,6 @@ class PortfolioEdit extends Component {
     return (
       <BaseLayout title={'Edit portfolio'}>
         <BasePage className='portfolio-create-page' title={'Edit portfolio'}>
-
           <Row>
             <Col md='6'>
               <PortfolioCreateForm
@@ -35,7 +32,6 @@ class PortfolioEdit extends Component {
               />
             </Col>
           </Row>
-
         </BasePage>
       </BaseLayout>
     );

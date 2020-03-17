@@ -1,16 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
-
 import { FormGroup, Label, Button } from 'reactstrap';
-
 import 'react-datepicker/dist/react-datepicker.css';
 
 class DatePickerWrapper extends React.Component {
-
   render() {
     const { label, value, selectDate, toggleDate, isEndDateHidden } = this.props;
-
     return (
       <FormGroup>
         <Label>{label}</Label>

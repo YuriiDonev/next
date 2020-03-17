@@ -1,7 +1,6 @@
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
 
-// MIDDLEWARE
 exports.jwtCheck = jwt({
       secret: jwks.expressJwtSecret({
         cache: true,
